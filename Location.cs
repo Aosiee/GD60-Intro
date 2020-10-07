@@ -1,18 +1,36 @@
 namespace adventure
 {
+    
     public class Location
     {
         //Properties
         private string _description;
-        private bool _canGoUp;
-        private bool _canGoLeft;
-        private bool _canGoRight;
-        private bool _canGoDown;
+        public bool CanGoUp {get; set;}
+        public bool CanGoDown {get; set;}
+        public bool CanGoLeft {get; set;}
+        public bool CanGoRight {get; set;}
 
         //Constructor
-        public Location()
+        public Location(string desc)
             {
-                //no clue yet
+                _description = desc;
+                CanGoUp = true;
+                CanGoDown = true;
+                CanGoLeft = true;
+                CanGoRight = true;
+            }
+
+        //Methods
+
+        public string Desc()
+        { return _description;}
+
+        public void SetAllowableDirections(bool up, bool down, bool left, bool right)
+            {
+                CanGoUp = up;
+                CanGoDown = down;
+                CanGoLeft = left;
+                CanGoRight = right;
             }
     }
 }
