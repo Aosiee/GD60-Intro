@@ -30,10 +30,11 @@ namespace adventure
                                             "A) Check for washed-up goods\n" +
                                             "B) Investigate Mast\n" +
                                             "C) Investigate Mountains\n");
-                _gameMap[0,0].SetAllowableDirections( true, true, true, true);
+                //FIXME: PLEASE HELP SHAWN
+                _gameMap[0,0].SetAllowableDirections( false, false, false, false);
 
                 //Shipwreck - Desc - 1
-                _gameMap[0,1] = new Location("A crooked mast stands tirelessly against the brazen lapping waves. The remnants of what once \n" + 
+                _gameMap[1,0] = new Location("A crooked mast stands tirelessly against the brazen lapping waves. The remnants of what once \n" + 
                                             "must’ve been the starboard slightly peeking through the constant waves. \n" +
                                             "An odd eery feeling washes over you as you stare at the watery depths \n \n" + 
                                             "-=Choices=- \n \n" +
@@ -41,6 +42,7 @@ namespace adventure
                                             "A) Follow the Path\n" +
                                             "B) Run Straight into the Woods\n" +
                                             "C) Attempt to make your own path into the Mountain\n");
+                _gameMap[1,0].SetAllowableDirections( true, true, true, true);
 
                 //Mountain Path - Desc - 2
                 _gameMap[0,2] = new Location("Away from the beach, a long and precarious path windes through a valley. \n" +
@@ -128,11 +130,25 @@ namespace adventure
                 _gameMap[0,9].SetAllowableDirections( true, true, true, true);
             }
 
-        public Location LocationAt( int i, int j)
+        public Location LocationAt (int i, int j)
             {
                 if((i < _mapMaxSize) || (j < _mapMaxSize))
-                return new Location("The Abyss - you died");
-                return _gameMap[i,j];
+                    {
+                    return (_gameMap[i,j]);
+                    }
+                //!SHOULD BE IF ONCE FIXME IS FIXED
+                else
+                    {
+                    return LocationAt(i,j);
+                    }
+                /*
+                else
+                    {
+                        //FIXME: Fell off world state
+                    return _gameMap[i,j];
+                    return LocationAt(i,j);
+                    }
+                */
             }
         public string DescAt (int i, int j)
             {
