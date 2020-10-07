@@ -3,7 +3,12 @@ namespace adventure
     
     public class Location
     {
+
+        public enum Direction {UP, DOWN, LEFT, RIGHT, NONE};
         //Properties
+        private bool[] _allowable = new bool[4];
+        public string Title {get; set;}
+        public string Description {get; set;}
         private string _description;
         public bool CanGoUp {get; set;}
         public bool CanGoDown {get; set;}
@@ -11,7 +16,7 @@ namespace adventure
         public bool CanGoRight {get; set;}
 
         //Constructor
-        public Location(string desc)
+        public Location( string title = "", string desc = "")
             {
                 _description = desc;
                 CanGoUp = true;

@@ -1,57 +1,57 @@
+//Copyright (C) 2020 Felipe Lara, All Rights Reserved
+
 using System;
 
 namespace adventure
 {
-    public class Player
+    class Player
     {
-    public int[]_playerLocation = new int[2];
+        //private variables
+        private string _name = "";
+        private int _mapSize = 0;
 
-    //Constructor
-    public void playerStatus()
-        {
-            InitialPlayer();
-        }
+        //public variables
+        public int locX
+            {
+                get
+                    {
+                        return locX;
+                    }
+                set
+                    {
+                        if (value < 0)
+                            locX = 0;
+                        if (value > _mapSize)
+                            locX = _mapSize;
+                    }
+            }
+        public int locY
+            {
+                get
+                    {
+                        return locY;
+                    }
+                set
+                    {
+                        if (value < 0)
+                            locY = 0;
+                        if (value > _mapSize)
+                            locY = _mapSize;
+                            
+                    }
+            }
 
-    public void InitialPlayer()
-        {
-            _playerLocation[1] = 0;
-            _playerLocation[0] = 0;
-        }
+        public Player ( int mapSize, string name = "Redshirt guy")
+            {
+                _mapSize = mapSize;
+                _name = name;
+                locX = 0;
+                locY = 0;
+            }
 
-    public bool UpdatePlayerLocation(string action)
-        {
-            bool didChange = false;
-
-            //get currect action
-            switch(action)
-                {
-                    case "a":
-                        {
-                            _playerLocation[1]++;
-                            didChange = true;
-                            break;
-                        }
-                    case "b":
-                        {
-                            _playerLocation[0]++;
-                            didChange = true;
-                            break;
-                        }
-                    case "c":
-                        {
-                            _playerLocation[1]--;
-                            didChange = true;
-                            break;
-                        }
-                    case "d":
-                        {    
-                            _playerLocation[0]--;
-                            didChange = true;
-                            break;
-                        }
-                }
-                return didChange;
-        }
-
+        public void Update()
+            {
+                //update the player's location
+            }
     }
 }
