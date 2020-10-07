@@ -16,7 +16,7 @@ namespace adventure
         public bool CanGoRight {get; set;}
 
         //Constructor
-        public Location(string desc = "")
+        public Location(string desc = "default_desc")
             {
                 _description = desc;
                 CanGoUp = true;

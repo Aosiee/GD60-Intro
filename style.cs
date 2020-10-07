@@ -4,7 +4,7 @@ using System;
 
 namespace adventure
 {
-    public class style
+    public class Style
     {
         //CONSTRUCTOR
 

@@ -11,10 +11,8 @@ namespace adventure
         //private variables
         private string _name = "";
 
-        //!Player stats
+        //!FIXME: Player stats
         //!REMOVED
-
-        //private Item[] _inventory;
 
         private int _mapSize = 0;
 
@@ -23,7 +21,7 @@ namespace adventure
         public int positionX = 0;
         public int positionY = 0;
 
-        public string playerSelection = "blank";
+        
         //FIXME: STACK OVERFLOW ERROR
         public int locX{get; set;}
             /*
@@ -63,7 +61,7 @@ namespace adventure
                     }
             }
             */
-        public Player ( int mapSize, string name = "Redshirt guy")
+        public Player ( int mapSize, string name = "default_name")
             {
                 _mapSize = mapSize;
                 _name = name;
@@ -75,7 +73,8 @@ namespace adventure
                 //_inventory = new Item[MAX_ITEMS];
             }
 
-        public void Update(ref string playerSelection)
+        public void Update(string playerSelection)
+        //Recieves from MovementHandler, moves player
             {
                 if(playerSelection == "a")
                     {
@@ -93,66 +92,6 @@ namespace adventure
                     {
                         locY--;
                     }
-                //update the player's location
             }
-        public bool handleAnswer (bool gameState, bool didChange, out string playerSelection)
-                    {
-                        bool gameOver = gameState;
-                        playerSelection = Console.ReadLine().ToLower();
-                        //int locationCompare;
-                        //locationIndex
-                        gameOver = false;
-                        // ^ Necessary for error removal
-                        switch(playerSelection)
-                        {
-                            case "a":
-                            {
-                                Console.WriteLine("Option A - Y++");
-                                Console.ReadKey();
-                                Console.Clear();
-                                break;
-                            }
-
-                            case "b":
-                            {
-                                Console.WriteLine("Option B - X++");
-                                Console.ReadKey();
-                                Console.Clear();
-                                break;
-                            }
-
-                            case "c":
-                            {
-                                Console.WriteLine("Option C - X--");
-                                Console.ReadKey();
-                                Console.Clear();
-                                break;
-                            }      
-
-                            case "d":
-                            {
-                                Console.WriteLine("Option D - Y--");
-                                Console.ReadKey();
-                                Console.Clear();
-                                break;
-                            }
-                            case "exit":
-                            {
-                                //TODO: fix this -> GameOverHandler();
-                                break;
-                            }
-
-                            // This is so incase someone mis-types they can retry
-                            default:
-                            {
-                                Console.WriteLine("Input Error. Please Try again");
-                                Console.ReadKey();
-                                Console.Clear();
-                                gameOver = true;
-                                break;
-                            }
-                        }
-                        return didChange;
-                    }
     }
 }
