@@ -9,7 +9,7 @@ namespace adventure
         private bool[] _allowable = new bool[4];
         public string Title {get; set;}
         public string Description {get; set;}
-        private string _description;
+        public string _description;
         public bool CanGoUp {get; set;}
         public bool CanGoDown {get; set;}
         public bool CanGoLeft {get; set;}
@@ -19,10 +19,10 @@ namespace adventure
         public Location(string desc = "default_desc")
             {
                 _description = desc;
-                CanGoUp = true;
-                CanGoDown = true;
-                CanGoLeft = true;
-                CanGoRight = true;
+                CanGoUp = false;
+                CanGoDown = false;
+                CanGoLeft = false;
+                CanGoRight = false;
             }
 
         //Methods

@@ -16,10 +16,10 @@ namespace adventure
         private Player _player = new Player(MAP_SIZE);
         private Map _theGameMap = new Map(MAP_SIZE);
         private MovementHandler _handlemove = new MovementHandler(true);
-        //private Style _style = new Style(true);
+        private Style _style = new Style();
         private bool didChange = false;
-        private bool testGameOver = false; 
-
+        private bool testGameOver = false;
+        
         //!Constructor
         public Game()
             {
@@ -34,12 +34,15 @@ namespace adventure
         public void Run()
             {
                 welcomePlayer();
+                
+                //There are two CheckEndGame to prevent double exits & prevent glitches when ending game
                 Render();
                 while(!_gameOver)
                     {
-                        Update();
-                        Render();
                         CheckEndGame();
+                        Update();
+                        CheckEndGame();
+                        Render();
                     }
                 
             }
@@ -47,19 +50,25 @@ namespace adventure
         private void Update()
             {
                 //collect user input
-                MovementHandler.handleAnswer(_gameOver, didChange, out _handlemove.playerSelection);
-                
+                MovementHandler.handleAnswer(didChange, out _handlemove.playerSelection, out testGameOver);
+
                 // update the _currentLocation here based on user input  
 
                 //update player state
-                _player.Update(_handlemove.playerSelection);
+                _player.Update(ref _handlemove.playerSelection, _currentLocation);
                 //Console.WriteLine("You moved");
 
             }
         private void Render()
             {
+                _style.SetColour();
+                Console.WriteLine("-=+ Story +=-");
+                Console.ResetColor();
+
                 // use the _currentLocation to show the description and prompt
-                Console.WriteLine(_theGameMap.ShowDescAt(_player.locX, _player.locY));
+                _currentLocation = _theGameMap.LocationAt(_player.locX, _player.locY);
+                Console.WriteLine(_currentLocation._description);
+
                 //!DEBUG LOCATION
                 if(DEBUG_MODE == true)
                     {
@@ -71,6 +80,7 @@ namespace adventure
 
         private void CheckEndGame()
             {
+                _handlemove.endGame = testGameOver;
                 if(testGameOver == true)
                     {
                         _gameOver = true;
@@ -81,7 +91,7 @@ namespace adventure
             {
             Console.Title = "Text RPG!";
             //Console.SetWindowSize(100, 35);
-            //SetColour();
+            _style.SetColour();
             Console.WriteLine("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█");    
             Console.WriteLine("█                   ╦─╦ ╔╗ ╦  ╔╗ ╔╗ ╔╦╗ ╔╗ ╔╗                    █");    
             Console.WriteLine("█                   ║║║ ╠─ ║  ║─ ║║ ║║║ ╠─ ╚╝                    █");    
@@ -93,6 +103,7 @@ namespace adventure
             Console.ResetColor();
             Console.WriteLine("Hello, Adventurer!\nYour Adventure Shall Begin!\n-=Press Any Key=-");
             Console.ReadLine();
+            Console.Clear();
             }
     }
 }

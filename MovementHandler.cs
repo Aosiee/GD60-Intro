@@ -8,23 +8,18 @@ namespace adventure
     {
         //private variables
 
-            
-
         //public properties
             public string playerSelection = "blank";
             public bool endGame = false;
         //Constructor
-        public MovementHandler(bool _gameOver)
+        public MovementHandler(bool testGameOver)
             {
-                _gameOver = endGame;
+
             }
-        public static bool handleAnswer (bool endGame, bool didChange, out string playerSelection)
+        public static bool handleAnswer (bool didChange, out string playerSelection, out bool testGameOver)
                     {
                         playerSelection = Console.ReadLine().ToLower();
-                        //int locationCompare;
-                        //locationIndex
-                        endGame = false;
-                        // ^ Necessary for error removal
+                        testGameOver = false;
                         switch(playerSelection)
                         {
                             case "a":
@@ -64,8 +59,8 @@ namespace adventure
                             }
                             case "exit":
                             {
-                                endGame = true;
-                                break;
+                                testGameOver = true;
+                                return testGameOver;
                             }
 
                             // This is so incase someone mis-types they can retry
@@ -77,8 +72,9 @@ namespace adventure
                                 //endGame = true;
                                 break;
                             }
+                        
                         }
-                    return didChange; 
+                    return didChange;
         }
     }
 }
